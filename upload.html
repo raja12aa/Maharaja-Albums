@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maharaja Albums | Upload Photos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .upload-container {
+      background: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+      border-radius: 16px;
+    }
+    .file-item:hover {
+      transform: translateY(-2px);
+      transition: all 0.2s;
+    }
+    #dropzone {
+      border: 2px dashed #667eea;
+      transition: all 0.3s;
+    }
+    #dropzone.drag-active {
+      background: rgba(102, 126, 234, 0.1);
+      border-color: #764ba2;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-indigo-600 via-purple-700 to-pink-600 text-white shadow-md">
+    <div class="container mx-auto flex flex-wrap items-center justify-between p-4">
+      <a href="index.html" class="text-2xl font-bold tracking-wide">MAHARAJA ALBUMS</a>
+      <nav class="space-x-6 hidden md:flex">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="upload.html" class="hover:underline font-semibold underline decoration-white">Upload</a>
+        <a href="about.html" class="hover:underline">About</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
+      </nav>
+      <div class="md:hidden">
+        <button id="navToggle" aria-label="Toggle navigation menu" class="focus:outline-none">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+    <nav id="mobileMenu" class="hidden bg-indigo-700 text-white md:hidden">
+      <a href="index.html" class="block px-4 py-2 hover:bg-indigo-600">Home</a>
+      <a href="upload.html" class="block px-4 py-2 hover:bg-indigo-600 font-semibold underline decoration-white">Upload</a>
+      <a href="about.html" class="block px-4 py-2 hover:bg-indigo-600">About</a>
+      <a href="contact.html" class="block px-4 py-2 hover:bg-indigo-600">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-12 max-w-4xl flex-grow">
+    <div class="upload-container p-6 md:p-8 mb-8">
+      <!-- Customer Details Form -->
+      <div class="mb-8">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Customer Details</h3>
+        <form id="uploadForm" novalidate>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label for="studioName" class="block text-sm font-medium text-gray-700 mb-1">Studio Name <span class="text-red-600">*</span></label>
+              <input
+                type="text"
+                id="studioName"
+                name="studioName"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Your studio name"
+                required
+                aria-required="true"
+                aria-describedby="studioNameError"
+              />
+              <p id="studioNameError" class="text-red-600 text-sm mt-1 hidden">Please enter your studio name.</p>
+            </div>
+            <div>
+              <label for="customerPhone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number <span class="text-red-600">*</span></label>
+              <input
+                type="tel"
+                id="customerPhone"
+                name="customerPhone"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="+91 9876543210"
+                pattern="^\+?\d{10,15}$"
+                required
+                aria-required="true"
+                aria-describedby="customerPhoneError"
+              />
+              <p id="customerPhoneError" class="text-red-600 text-sm mt-1 hidden">Please enter a valid phone number.</p>
+            </div>
+          </div>
+
+          <!-- Album Material Selection -->
+          <div class="mt-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Album Material Selection</h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- Glossy Box -->
+              <div class="border border-gray-200 rounded-lg p-4 bg-blue-50">
+                <h4 class="font-medium text-gray-700 mb-3">High Glossy</h4>
+                <div class="space-y-4">
+                  <div>
+                    <label for="glossyQty" class="block text-sm font-medium text-gray-700">Quantity</label>
+                    <input
+                      type="number"
+                      id="glossyQty"
+                      name="glossyQty"
+                      min="0"
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder="0"
+                    />
+                  </div>
+                  <div>
+                    <label for="glossyPages" class="block text-sm font-medium text-gray-700">Page Numbers</label>
+                    <input
+                      type="text"
+                      id="glossyPages"
+                      name="glossyPages"
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder="e.g. 1-5,8,10"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Silk Matt Box -->
+              <div class="border border-gray-200 rounded-lg p-4 bg-blue-50">
+                <h4 class="font-medium text-gray-700 mb-3">Silk Matt</h4>
+                <div class="space-y-4">
+                  <div>
+                    <label for="silkMattQty" class="block text-sm font-medium text-gray-700">Quantity</label>
+                    <input
+                      type="number"
+                      id="silkMattQty"
+                      name="silkMattQty"
+                      min="0"
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder="0"
+                    />
+                  </div>
+                  <div>
+                    <label for="silkMattPages" class="block text-sm font-medium text-gray-700">Page Numbers</label>
+                    <input
+                      type="text"
+                      id="silkMattPages"
+                      name="silkMattPages"
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder="e.g. 1-5,8,10"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Feather Box -->
+              <div class="border border-gray-200 rounded-lg p-4 bg-blue-50">
+                <h4 class="font-medium text-gray-700 mb-3">Feather</h4>
+                <div class="space-y-4">
+                  <div>
+                    <label for="featherQty" class="block text-sm font-medium text-gray-700">Quantity</label>
+                    <input
+                      type="number"
+                      id="featherQty"
+                      name="featherQty"
+                      min="0"
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder="0"
+                    />
+                  </div>
+                  <div>
+                    <label for="featherPages" class="block text-sm font-medium text-gray-700">Page Numbers</label>
+                    <input
+                      type="text"
+                      id="featherPages"
+                      name="featherPages"
+                      class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                      placeholder="e.g. 1-5,8,10"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <!-- Additional Details Box -->
+              <div class="border border-gray-200 rounded-lg p-4 bg-blue-50 md:col-span-3">
+                <h4 class="font-medium text-gray-700 mb-3">Special Instructions</h4>
+                <textarea
+                  id="specialInstructions"
+                  name="specialInstructions"
+                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 h-24"
+                  placeholder="Any special requirements or notes..."
+                ></textarea>
+              </div>
+            </div>
+
+            <!-- File Upload Section -->
+            <div
+              id="dropzone"
+              class="p-8 text-center rounded-lg cursor-pointer mt-8"
+              tabindex="0"
+              aria-label="File upload dropzone"
+            >
+              <div
+                class="w-20 h-20 mx-auto mb-6 rounded-full gradient-bg flex items-center justify-center"
+              >
+                <i class="fas fa-cloud-upload-alt text-3xl text-white"></i>
+              </div>
+              <h3 class="text-xl font-bold text-gray-800 mb-2">Drag & Drop Files</h3>
+              <p class="text-gray-600 mb-6">or click to browse files</p>
+              <input type="file" id="fileInput" class="hidden" multiple aria-hidden="true" />
+              <button
+                id="browseBtn"
+                type="button"
+                class="px-6 py-3 gradient-bg text-white rounded-full font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              >
+                Select Files
+              </button>
+              <p class="text-sm text-gray-500 mt-4">No file size limits • All formats supported</p>
+            </div>
+
+            <!-- File List -->
+            <div id="fileList" class="mt-8 hidden" aria-live="polite" aria-atomic="true">
+              <div class="flex justify-between items-center mb-4">
+                <h4 class="font-medium text-gray-700">
+                  Selected Files (<span id="fileCount">0</span>)
+                </h4>
+                <button
+                  id="clearAllBtn"
+                  type="button"
+                  class="text-red-500 hover:text-red-700 text-sm focus:outline-none"
+                  aria-label="Clear all selected files"
+                >
+                  <i class="fas fa-trash-alt mr-1"></i> Clear All
+                </button>
+              </div>
+              <div
+                id="fileItems"
+                class="space-y-3 max-h-96 overflow-y-auto"
+                role="list"
+                aria-label="Selected files list"
+              ></div>
+
+              <div class="mt-8 pt-6 border-t border-gray-100">
+                <div class="flex justify-between items-center mb-4">
+                  <span class="font-medium">Upload Progress</span>
+                  <span id="progressPercent" class="font-medium">0%</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                  <div
+                    id="progressBar"
+                    class="gradient-bg h-2.5 rounded-full"
+                    style="width: 0%"
+                  ></div>
+                </div>
+                <div class="flex flex-col sm:flex-row gap-4">
+                  <button
+                    id="uploadBtn"
+                    type="button"
+                    class="flex-1 py-3 gradient-bg text-white rounded-lg font-medium hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    disabled
+                  >
+                    <i class="fas fa-upload mr-2"></i> Start Upload
+                  </button>
+                  <button
+                    id="addMoreBtn"
+                    type="button"
+                    class="flex-1 py-3 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+                  >
+                    <i class="fas fa-plus mr-2"></i> Add More Files
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-8 px-4">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0 text-center md:text-left">
+        <h3 class="text-lg font-bold mb-1">Maharaja Albums</h3>
+        <p class="text-sm">An unit of Rajalamination | Established 2016</p>
+      </div>
+      <div class="flex space-x-6 text-center md:text-right">
+        <a
+          href="https://wa.me/919842902191"
+          target="_blank"
+          aria-label="WhatsApp"
+          class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center hover:bg-green-700 transition"
+          ><i class="fab fa-whatsapp text-white"></i
+        ></a>
+        <a
+          href="mailto:rajalaminationtvl@gmail.com"
+          aria-label="Email"
+          class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-red-700 transition"
+          ><i class="fas fa-envelope text-white"></i
+        ></a>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-500 text-sm">
+      <p>© 2023 Maharaja Albums. Rajalamination © 2000. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="scripts/common.js"></script>
+  <script src="scripts/upload.js"></script>
+</body>
+</html>
