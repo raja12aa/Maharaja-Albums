@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Maharaja Albums | About Us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-indigo-600 via-purple-700 to-pink-600 text-white shadow-md">
+    <div class="container mx-auto flex flex-wrap items-center justify-between p-4">
+      <a href="index.html" class="text-2xl font-bold tracking-wide">MAHARAJA ALBUMS</a>
+      <nav class="space-x-6 hidden md:flex">
+        <a href="index.html" class="hover:underline">Home</a>
+        <a href="upload.html" class="hover:underline">Upload</a>
+        <a href="about.html" class="hover:underline font-semibold underline decoration-white">About</a>
+        <a href="contact.html" class="hover:underline">Contact</a>
+      </nav>
+      <div class="md:hidden">
+        <button id="navToggle" aria-label="Toggle navigation menu" class="focus:outline-none">
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+    </div>
+    <nav id="mobileMenu" class="hidden bg-indigo-700 text-white md:hidden">
+      <a href="index.html" class="block px-4 py-2 hover:bg-indigo-600">Home</a>
+      <a href="upload.html" class="block px-4 py-2 hover:bg-indigo-600">Upload</a>
+      <a href="about.html" class="block px-4 py-2 hover:bg-indigo-600 font-semibold underline decoration-white">About</a>
+      <a href="contact.html" class="block px-4 py-2 hover:bg-indigo-600">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-12 max-w-4xl flex-grow">
+    <section class="mb-12">
+      <h1 class="text-4xl font-extrabold text-gray-800 mb-6 text-center">About Maharaja Albums</h1>
+      <p class="text-lg text-gray-700 mb-6 leading-relaxed text-justify">
+        Maharaja Albums is a premier photo album service, proudly operating as a unit of Rajalamination since 2016. We specialize in creating high-quality, custom photo albums that preserve your precious memories with elegance and style.
+      </p>
+      <p class="text-lg text-gray-700 mb-6 leading-relaxed text-justify">
+        Our commitment to excellence is reflected in our use of premium materials such as High Glossy, Silk Matt, and Feather finishes. We combine traditional craftsmanship with modern technology to deliver albums that are both beautiful and durable.
+      </p>
+      <p class="text-lg text-gray-700 mb-6 leading-relaxed text-justify">
+        With a focus on customer satisfaction, we offer a seamless photo upload experience, secure transfers, and no size limits, ensuring your memories are handled with the utmost care and professionalism.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Our Mission & Values</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-heart text-pink-600 text-4xl mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Passion</h3>
+          <p class="text-gray-600">
+            We are passionate about preserving memories and delivering exceptional quality.
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-shield-alt text-indigo-600 text-4xl mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Integrity</h3>
+          <p class="text-gray-600">
+            We uphold the highest standards of honesty and transparency in all our dealings.
+          </p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md text-center">
+          <i class="fas fa-users text-purple-600 text-4xl mb-4"></i>
+          <h3 class="text-xl font-semibold mb-2">Customer Focus</h3>
+          <p class="text-gray-600">
+            Our customers are at the heart of everything we do, and their satisfaction drives us.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-8 px-4">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+      <div class="mb-4 md:mb-0 text-center md:text-left">
+        <h3 class="text-lg font-bold mb-1">Maharaja Albums</h3>
+        <p class="text-sm">An unit of Rajalamination | Established 2016</p>
+      </div>
+      <div class="flex space-x-6 text-center md:text-right">
+        <a
+          href="https://wa.me/919842902191"
+          target="_blank"
+          aria-label="WhatsApp"
+          class="w-8 h-8 rounded-full bg-green-600 flex items-center justify-center hover:bg-green-700 transition"
+          ><i class="fab fa-whatsapp text-white"></i
+        ></a>
+        <a
+          href="mailto:rajalaminationtvl@gmail.com"
+          aria-label="Email"
+          class="w-8 h-8 rounded-full bg-red-600 flex items-center justify-center hover:bg-red-700 transition"
+          ><i class="fas fa-envelope text-white"></i
+        ></a>
+      </div>
+    </div>
+    <div class="border-t border-gray-700 mt-6 pt-6 text-center text-gray-500 text-sm">
+      <p>© 2023 Maharaja Albums. Rajalamination © 2000. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="scripts/common.js"></script>
+</body>
+</html>
