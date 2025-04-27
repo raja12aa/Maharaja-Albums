@@ -10,24 +10,16 @@ const PORT = 3000;
 // Enable CORS for all origins (adjust as needed)
 app.use(cors());
 
-// Network shared partition path (adjust as needed)
-const networkSharePath = '\\\\Mahhyyy27\\g';
-
-// Check if network share path exists
-try {
-  if (!fs.existsSync(networkSharePath)) {
-    console.error(`Network share path does not exist: ${networkSharePath}`);
-    process.exit(1);
-  }
-} catch (err) {
-  console.error('Error accessing network share path:', err);
-  process.exit(1);
+// Create uploads directory if not exists
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir);
 }
 
-// Configure multer storage with timestamped filenames on network share
+// Configure multer storage with timestamped filenames
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, networkSharePath);
+    cb(null, uploadDir);
   },
   filename: function (req, file, cb) {
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
